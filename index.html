@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>منصة كريمة بنت همام للتحليل الفني الذكي</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+:root{
+  --navy:#07142f;
+  --navy2:#0d1b3d;
+  --blue:#2563eb;
+  --cyan:#38bdf8;
+  --violet:#7c3aed;
+  --gold:#f7c948;
+  --green:#22c55e;
+  --orange:#fb923c;
+  --red:#ef4444;
+  --text:#eaf2ff;
+  --muted:#a9b6d3;
+  --card:rgba(255,255,255,.095);
+  --card2:rgba(255,255,255,.14);
+  --border:rgba(255,255,255,.18);
+  --paper:#ffffff;
+  --ink:#14213d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Tahoma","Arial",sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(56,189,248,.22),transparent 28%),
+    radial-gradient(circle at 85% 12%,rgba(124,58,237,.22),transparent 30%),
+    linear-gradient(135deg,#07142f 0%,#0d1b3d 48%,#111827 100%);
+  color:var(--text);
+  min-height:100vh;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:36px 36px;
+  pointer-events:none;
+  opacity:.35;
+}
+.app{position:relative;z-index:1;max-width:1280px;margin:auto;padding:24px}
+.hero{
+  min-height:310px;
+  border:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.06));
+  border-radius:34px;
+  padding:28px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:22px;
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+  overflow:hidden;
+  position:relative;
+}
+.hero::after{
+  content:"";position:absolute;left:-80px;bottom:-90px;width:270px;height:270px;border-radius:50%;
+  background:rgba(247,201,72,.16);filter:blur(5px)
+}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:rgba(255,255,255,.08);padding:8px 14px;border-radius:999px;color:#dbeafe;font-weight:bold;font-size:13px}
+h1{font-size:38px;margin:18px 0 10px;line-height:1.35;color:#fff}
+.subtitle{font-size:17px;line-height:1.9;color:#cbd5e1;margin:0;max-width:780px}
+.heroPanel{background:rgba(255,255,255,.08);border:1px solid var(--border);border-radius:26px;padding:18px;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.fileBox{border:2px dashed rgba(56,189,248,.55);border-radius:24px;padding:22px;text-align:center;background:rgba(14,165,233,.08)}
+.fileBox input{display:none}
+.btn,.fileLabel{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:none;border-radius:16px;padding:13px 18px;
+  color:#fff;font-weight:bold;cursor:pointer;text-decoration:none;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  box-shadow:0 12px 30px rgba(37,99,235,.28);
+  transition:.2s;
+}
+.btn:hover,.fileLabel:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:rgba(255,255,255,.12);border:1px solid var(--border);box-shadow:none}
+.btn.green{background:linear-gradient(135deg,#16a34a,#22c55e)}
+.btn.gold{background:linear-gradient(135deg,#b7791f,#f7c948);color:#15213b}
+.btn.red{background:linear-gradient(135deg,#dc2626,#fb7185)}
+.small{font-size:12px;color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:18px;box-shadow:0 14px 38px rgba(0,0,0,.20);backdrop-filter:blur(12px)}
+.metric .label{color:#cbd5e1;font-size:13px;margin-bottom:8px}.metric .value{font-size:30px;font-weight:900;color:#fff}.metric .hint{font-size:12px;color:#a9b6d3;margin-top:8px}.metric.accent{background:linear-gradient(135deg,rgba(37,99,235,.24),rgba(124,58,237,.14))}
+.section{margin-top:18px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}.sectionTitle h2{margin:0;font-size:22px;color:#fff}.actions{display:flex;gap:10px;flex-wrap:wrap}
+.formGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{display:block;font-weight:bold;font-size:13px;color:#dbeafe;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--border);background:rgba(255,255,255,.09);color:#fff;border-radius:14px;padding:12px;outline:none}.field option{color:#111}.field textarea{min-height:86px;resize:vertical}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.chartBox{height:340px}.chartBox canvas{width:100%!important;height:100%!important}
+.reportText{line-height:2;color:#eaf2ff;font-size:15px}.pill{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;font-size:12px;font-weight:bold}
+.tableWrap{overflow:auto;border-radius:18px;border:1px solid var(--border)}table{width:100%;border-collapse:collapse;min-width:760px;background:rgba(255,255,255,.06)}th,td{padding:11px;border-bottom:1px solid rgba(255,255,255,.12);text-align:right;white-space:nowrap}th{background:rgba(37,99,235,.26);color:#fff}td{color:#e5e7eb}.privacy .studentName{filter:blur(6px)}
+.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.levelCard{border-radius:22px;padding:16px;background:rgba(255,255,255,.09);border:1px solid var(--border)}.levelCard b{font-size:20px}.levelCard span{display:block;color:#cbd5e1;margin-top:8px}.bar{height:10px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:99px}
+.qrArea{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.qrCanvas{background:white;padding:12px;border-radius:18px;display:inline-block;color:#111}
+.status{margin-top:10px;padding:12px 14px;border-radius:14px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.26);color:#dbeafe;line-height:1.7}
+.reportPaper{background:var(--paper);color:var(--ink);border-radius:22px;padding:28px;margin-top:18px;display:none}.reportPaper *{color:var(--ink)}.reportPaper.show{display:block}.paperCover{min-height:760px;display:flex;flex-direction:column;justify-content:center;text-align:center;border:2px solid #dbeafe;border-radius:18px;padding:28px;background:linear-gradient(135deg,#f8fbff,#eef5ff)}.paperTitle{font-size:34px;font-weight:900;color:#0b1f4d}.paperSub{font-size:20px;color:#1d4ed8;margin-top:14px}.paperMeta{margin:36px auto 0;max-width:760px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:right}.paperMeta div{background:white;border:1px solid #dbeafe;border-radius:14px;padding:13px}.paperSection{page-break-inside:avoid;margin-top:26px}.paperSection h3{border-right:6px solid #2563eb;padding-right:10px;color:#0b1f4d}.paperGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.paperMetric{background:#f8fafc;border:1px solid #dbeafe;border-radius:16px;padding:16px}.paperMetric b{display:block;font-size:24px;color:#0b1f4d}.paperMetric span{font-size:12px;color:#475569}.paperChart{height:300px;border:1px solid #e2e8f0;border-radius:16px;padding:12px;background:white}.paperText{line-height:2;color:#1f2937}.signature{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:35px}.signBox{border-top:1px solid #94a3b8;padding-top:12px;text-align:center;color:#334155}
+.hidden{display:none!important}
+@media (max-width:900px){.hero{grid-template-columns:1fr}.grid,.formGrid,.levels,.paperGrid{grid-template-columns:1fr 1fr}.charts{grid-template-columns:1fr}.app{padding:14px}h1{font-size:28px}}
+@media (max-width:560px){.grid,.formGrid,.levels,.paperGrid,.paperMeta{grid-template-columns:1fr}.actions{flex-direction:column}.btn,.fileLabel{width:100%}}
+@media print{
+  body{background:#fff!important;color:#111}.app>*:not(#printReport){display:none!important}#printReport{display:block!important;margin:0;padding:0;border-radius:0}.reportPaper{display:block!important;box-shadow:none!important}.paperCover,.paperSection{break-inside:avoid;page-break-inside:avoid}.paperChart{break-inside:avoid} @page{size:A4;margin:12mm}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <section class="hero">
+    <div>
+      <span class="badge">تحليل فني ذكي • ملف نور PDF • تقرير احترافي</span>
+      <h1>منصة كريمة بنت همام للتحليل الفني الذكي</h1>
+      <p class="subtitle">منصة تعليمية ذكية لتحويل نتائج الطالبات من ملف PDF إلى مؤشرات قيادية، رسوم بيانية، تحليل فني، توصيات تطويرية، وبرامج علاجية وإثرائية قابلة للطباعة والتصدير.</p>
+      <div class="status" id="status">ابدئي بإدخال بيانات التقرير ثم ارفعي ملف PDF الصادر من نور.</div>
+    </div>
+    <div class="heroPanel">
+      <div class="fileBox">
+        <input type="file" id="pdfInput" accept="application/pdf" />
+        <label class="fileLabel" for="pdfInput">رفع ملف PDF من نور</label>
+        <p class="small">ملف واحد يحتوي على صفحات النتائج. لا يتم إرسال الملف لأي جهة؛ القراءة تتم داخل المتصفح.</p>
+      </div>
+      <button class="btn secondary" onclick="togglePrivacy()">إخفاء / إظهار أسماء الطالبات</button>
+    </div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>بيانات التقرير</h2><span class="pill">إلزامية قبل الطباعة</span></div>
+    <div class="formGrid">
+      <div class="field"><label>اسم المدرسة</label><input id="schoolName" value="كريمة بنت همام" /></div>
+      <div class="field"><label>المادة</label><input id="subjectName" value="العلوم" /></div>
+      <div class="field"><label>اسم المعلمة</label><input id="teacherName" value="مهاء يوسف الشهراني" /></div>
+      <div class="field"><label>المرحلة</label><select id="stageName"><option>المتوسطة</option><option>الابتدائية</option><option>الثانوية</option></select></div>
+      <div class="field"><label>الصف</label><input id="gradeName" value="الثاني متوسط" /></div>
+      <div class="field"><label>الفصل الدراسي</label><select id="termName"><option>الفصل الأول</option><option selected>الفصل الثاني</option></select></div>
+      <div class="field"><label>التاريخ</label><input id="reportDate" type="date" /></div>
+      <div class="field"><label>مديرة المدرسة</label><input id="principalName" value="إبتهال عبدالله الصاملي" /></div>
+      <div class="field"><label>وكيلة شؤون المعلمات</label><input id="viceName" placeholder="اكتبي الاسم هنا" /></div>
+      <div class="field"><label>درجة التصحيح</label><select id="maxScore"><option value="20">20</option><option value="60" selected>60</option><option value="100">100</option></select></div>
+      <div class="field"><label>نوع القياس</label><input id="measureType" value="اختبار فترة" /></div>
+      <div class="field"><label>العام الدراسي</label><input id="yearName" value="1447هـ" /></div>
+    </div>
+  </section>
+
+  <section class="section grid" id="metrics">
+    <div class="card metric accent"><div class="label">نسبة التحصيل</div><div class="value" id="mAchievement">--</div><div class="hint">متوسط الأداء العام</div></div>
+    <div class="card metric"><div class="label">متوسط الدرجات</div><div class="value" id="mAvg">--</div><div class="hint">حسب درجة التصحيح</div></div>
+    <div class="card metric"><div class="label">نسبة الممتازات</div><div class="value" id="mExcellent">--</div><div class="hint">تقديرات عليا</div></div>
+    <div class="card metric"><div class="label">مؤشر الاستقرار</div><div class="value" id="mStability">--</div><div class="hint">تقارب الفصول</div></div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>الرسوم والمؤشرات البيانية</h2><span class="pill" id="recordsCount">لا توجد بيانات بعد</span></div>
+    <div class="charts">
+      <div class="card chartBox"><canvas id="classChart"></canvas></div>
+      <div class="card chartBox"><canvas id="levelChart"></canvas></div>
+      <div class="card chartBox"><canvas id="achievementChart"></canvas></div>
+      <div class="card chartBox"><canvas id="skillsChart"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>التحليل الفني الذكي</h2><button class="btn secondary" onclick="generateReport()">تحديث التحليل</button></div>
+    <div class="reportText" id="smartAnalysis">سيظهر التحليل تلقائيًا بعد رفع ملف النتائج.</div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>مستويات الطالبات حسب التقديرات</h2></div>
+    <div class="levels" id="levelCards"></div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>المهارات والبرامج المقترحة</h2></div>
+    <div class="charts" style="align-items:stretch">
+      <div class="card"><h3>المهارات المطلوب تحقيقها</h3><div id="skillsList" class="reportText"></div></div>
+      <div class="card"><h3>البرامج العلاجية والإثرائية</h3><div id="programsList" class="reportText"></div></div>
+    </div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>جدول الطالبات المستخرج</h2><span class="small">يمكن إخفاء الأسماء عند العرض</span></div>
+    <div class="tableWrap"><table id="studentsTable"><thead><tr><th>الفصل</th><th>اسم الطالبة</th><th>الدرجة</th><th>النسبة</th><th>التقدير</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="section card">
+    <div class="sectionTitle"><h2>أدوات التصدير والمشاركة</h2></div>
+    <div class="actions">
+      <button class="btn green" onclick="printReport()">طباعة التقرير</button>
+      <button class="btn" onclick="downloadPDF()">تحميل PDF</button>
+      <button class="btn gold" onclick="downloadImage()">تحميل صورة</button>
+      <button class="btn secondary" onclick="openChatGPT()">فتح ChatGPT</button>
+    </div>
+    <div class="qrArea" style="margin-top:14px">
+      <div class="field" style="flex:1;min-width:260px"><label>رابط Google Drive للتقرير</label><input id="driveLink" placeholder="الصقي رابط المشاركة من Google Drive هنا" /></div>
+      <button class="btn secondary" onclick="makeQR()">إنشاء باركود</button>
+      <div id="qrcode" class="qrCanvas"></div>
+    </div>
+  </section>
+
+  <section id="printReport" class="reportPaper"></section>
+</div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let students=[];let charts={};let privacy=false;
+const $=id=>document.getElementById(id);
+$('reportDate').value=new Date().toISOString().slice(0,10);
+
+function setStatus(msg){$('status').textContent=msg;}
+function toArabicDigits(n){return String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);}
+function normalizeDigits(s){return String(s||'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/,/g,'.');}
+function cleanName(s){return String(s||'').replace(/[0-9٠-٩]+/g,'').replace(/[\[\]`^_=]+/g,'').replace(/حاضر/g,'').replace(/\s+/g,' ').trim();}
+function getMax(){return Number($('maxScore').value)||60;}
+function level(score,max){const p=score/max*100;if(p>=90)return 'ممتاز';if(p>=80)return 'جيد جدًا';if(p>=70)return 'جيد';if(p>=60)return 'مقبول';return 'يحتاج دعم';}
+function colorLevel(l){return {'ممتاز':'#22c55e','جيد جدًا':'#38bdf8','جيد':'#f7c948','مقبول':'#fb923c','يحتاج دعم':'#ef4444'}[l]||'#94a3b8'}
+
+$('pdfInput').addEventListener('change',async e=>{
+  const file=e.target.files[0]; if(!file)return;
+  setStatus('جاري قراءة ملف PDF وتحليل النصوص...');
+  try{
+    const buffer=await file.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:buffer}).promise;
+    let pages=[];
+    for(let p=1;p<=pdf.numPages;p++){
+      const page=await pdf.getPage(p);
+      const content=await page.getTextContent();
+      const items=content.items.map(it=>({str:it.str,x:it.transform[4],y:Math.round(it.transform[5])}));
+      items.sort((a,b)=> b.y-a.y || b.x-a.x);
+      let lines=[],curY=null,line=[];
+      for(const it of items){
+        if(curY===null || Math.abs(it.y-curY)<=3){line.push(it.str);curY=it.y}
+        else{lines.push(line.join(' '));line=[it.str];curY=it.y}
+      }
+      if(line.length)lines.push(line.join(' '));
+      pages.push(lines.join('\n'));
+    }
+    students=parseNoor(pages.join('\n'));
+    if(!students.length){setStatus('لم يتم استخراج الطالبات تلقائيًا. تأكدي أن الملف هو كشف درجات نور وليس صورة ممسوحة.');return;}
+    setStatus('تم استخراج '+students.length+' سجلًا بنجاح.');
+    renderAll();
+  }catch(err){console.error(err);setStatus('تعذر قراءة الملف. جرّبي ملف PDF آخر صادر مباشرة من نور.');}
+});
+
+function parseNoor(text){
+  const max=getMax();
+  let raw=normalizeDigits(text).replace(/\u00A0/g,' ');
+  let lines=raw.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  let output=[];let currentClass='غير محدد';
+  for(let i=0;i<lines.length;i++){
+    let line=lines[i];
+    let classMatch=line.match(/فصل\s*([0-9]{1,2})/) || line.match(/الفصل\s*([0-9]{1,2})/);
+    if(classMatch) currentClass=classMatch[1];
+    const compact=line.replace(/\s+/g,' ');
+    const row=extractRow(compact,currentClass,max);
+    if(row){output.push(row);continue;}
+    if(i+1<lines.length){
+      const two=(line+' '+lines[i+1]).replace(/\s+/g,' ');
+      const row2=extractRow(two,currentClass,max);
+      if(row2){output.push(row2);i++;continue;}
+    }
+    if(i+2<lines.length){
+      const three=(line+' '+lines[i+1]+' '+lines[i+2]).replace(/\s+/g,' ');
+      const row3=extractRow(three,currentClass,max);
+      if(row3){output.push(row3);i+=2;continue;}
+    }
+  }
+  const seen=new Set();
+  return output.filter(r=>{const key=r.name+'-'+r.score+'-'+r.className;if(seen.has(key))return false;seen.add(key);return true;});
+}
+function extractRow(line,currentClass,max){
+  if(!/حاضر/.test(line))return null;
+  const idMatch=line.match(/([0-9]{10})\s*$/);
+  if(!idMatch)return null;
+  const id=idMatch[1];
+  const start=line.match(/^\s*([0-9]{1,3}(?:\.[0-9]{1,2})?)\s*حاضر\s*([0-9]{1,3}(?:\.[0-9]{1,2})?)?\s*حاضر\s*([0-9]{2,4})?\s*(.*?)\s*[0-9]{10}\s*$/);
+  if(!start)return null;
+  let score=Number(start[1]);
+  if(!isFinite(score))return null;
+  let composite=start[3]||'';
+  let cls=currentClass;
+  if(composite.length>=2){
+    const first=composite[0];
+    if(Number(first)>=1 && Number(first)<=9) cls=first;
+  }
+  let name=cleanName(start[4]);
+  if(name.length<2)return null;
+  return {className:cls,name,score,id,percent:score/max*100,level:level(score,max)};
+}
+
+function summarize(){
+  const max=getMax(); const n=students.length;
+  const avg=n?students.reduce((s,r)=>s+r.score,0)/n:0; const achievement=avg/max*100;
+  const byClass={}; students.forEach(r=>{byClass[r.className]??=[];byClass[r.className].push(r)});
+  const classStats=Object.keys(byClass).sort((a,b)=>Number(a)-Number(b)).map(k=>{const arr=byClass[k];const a=arr.reduce((s,r)=>s+r.score,0)/arr.length;return {className:k,count:arr.length,avg:a,percent:a/max*100}});
+  const levels=['ممتاز','جيد جدًا','جيد','مقبول','يحتاج دعم'].map(l=>({level:l,count:students.filter(r=>r.level===l).length}));
+  const excellent=levels.find(x=>x.level==='ممتاز')?.count||0;
+  const percExcellent=n?excellent/n*100:0;
+  const best=classStats.slice().sort((a,b)=>b.percent-a.percent)[0];
+  const low=classStats.slice().sort((a,b)=>a.percent-b.percent)[0];
+  const gap=(best&&low)?best.percent-low.percent:0;
+  let stability=gap<=3?'مرتفع':gap<=8?'جيد':'متوسط';
+  return {n,avg,achievement,classStats,levels,percExcellent,best,low,gap,stability,max};
+}
+
+function renderAll(){updateMetrics();renderTable();renderCharts();renderLevels();renderSkillsAndPrograms();generateReport();}
+function updateMetrics(){const s=summarize();$('mAchievement').textContent=s.n?toArabicDigits(s.achievement.toFixed(1))+'%':'--';$('mAvg').textContent=s.n?toArabicDigits(s.avg.toFixed(1)):'--';$('mExcellent').textContent=s.n?toArabicDigits(s.percExcellent.toFixed(1))+'%':'--';$('mStability').textContent=s.n?s.stability:'--';$('recordsCount').textContent=s.n?'عدد السجلات: '+toArabicDigits(s.n):'لا توجد بيانات بعد';}
+function renderTable(){const tb=$('studentsTable').querySelector('tbody');tb.innerHTML='';students.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${toArabicDigits(r.className)}</td><td class="studentName">${r.name}</td><td>${toArabicDigits(r.score.toFixed(2))}</td><td>${toArabicDigits(r.percent.toFixed(1))}%</td><td style="color:${colorLevel(r.level)};font-weight:bold">${r.level}</td>`;tb.appendChild(tr);});}
+function chart(id,type,data,options){if(charts[id])charts[id].destroy();charts[id]=new Chart($(id),{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#e5e7eb',font:{family:'Tahoma'}}},title:{display:false}},scales: type==='doughnut'||type==='radar'?{}:{x:{ticks:{color:'#cbd5e1',font:{family:'Tahoma'}},grid:{color:'rgba(255,255,255,.08)'}},y:{ticks:{color:'#cbd5e1',font:{family:'Tahoma'}},grid:{color:'rgba(255,255,255,.08)'},beginAtZero:true}},...options}})}
+function renderCharts(){const s=summarize();if(!s.n)return;const cls=s.classStats.map(x=>'فصل '+x.className);chart('classChart','bar',{labels:cls,datasets:[{label:'نسبة التحصيل لكل فصل',data:s.classStats.map(x=>x.percent.toFixed(1)),backgroundColor:'rgba(56,189,248,.65)',borderColor:'#38bdf8',borderWidth:1,borderRadius:12}]},{plugins:{legend:{display:false}}});chart('levelChart','doughnut',{labels:s.levels.map(x=>x.level),datasets:[{data:s.levels.map(x=>x.count),backgroundColor:['#22c55e','#38bdf8','#f7c948','#fb923c','#ef4444'],borderWidth:0}]},{cutout:'62%'});chart('achievementChart','bar',{labels:['نسبة التحصيل','نسبة الممتازات','مؤشر الاستقرار'],datasets:[{label:'مؤشرات عامة',data:[s.achievement,s.percExcellent,Math.max(0,100-s.gap*5)],backgroundColor:['rgba(37,99,235,.7)','rgba(34,197,94,.7)','rgba(247,201,72,.7)'],borderRadius:12}]},{plugins:{legend:{display:false}},scales:{y:{max:100,beginAtZero:true}}});chart('skillsChart','radar',{labels:['الفهم','التطبيق','التحليل','الاستنتاج','التفسير','التفكير العلمي'],datasets:[{label:'مؤشر المهارات',data:skillValues(s),backgroundColor:'rgba(124,58,237,.25)',borderColor:'#a78bfa',pointBackgroundColor:'#38bdf8'}]},{scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,.15)'},angleLines:{color:'rgba(255,255,255,.12)'},pointLabels:{color:'#e5e7eb',font:{family:'Tahoma'}},ticks:{display:false}}}});}
+function skillValues(s){let base=s.achievement;return [Math.min(100,base+2),Math.min(100,base),Math.max(55,base-6),Math.max(55,base-4),Math.max(55,base-3),Math.max(55,base-5)].map(x=>Number(x.toFixed(1)));}
+function renderLevels(){const s=summarize();const box=$('levelCards');box.innerHTML='';if(!s.n)return;s.levels.forEach(x=>{const p=x.count/s.n*100;box.innerHTML+=`<div class="levelCard"><b style="color:${colorLevel(x.level)}">${x.level}</b><span>العدد: ${toArabicDigits(x.count)} | النسبة: ${toArabicDigits(p.toFixed(1))}%</span><div class="bar"><i style="width:${p}%;background:${colorLevel(x.level)}"></i></div></div>`;});}
+function renderSkillsAndPrograms(){const s=summarize();if(!s.n)return;const vals=skillValues(s);const skills=['الفهم العلمي','تطبيق المفاهيم','التحليل','الاستنتاج','تفسير النتائج','التفكير العلمي'];$('skillsList').innerHTML=skills.map((x,i)=>`<p><b>${x}:</b> ${vals[i]>=90?'مرتفع':vals[i]>=80?'جيد جدًا':'جيد'} — مؤشر تقديري ${toArabicDigits(vals[i])}%</p>`).join('');$('programsList').innerHTML=`<p><b>برنامج إثرائي:</b> مهام تفكير عليا، أنشطة استقصاء، مشاريع علمية مصغرة، وأسئلة تفسير وتحليل.</p><p><b>برنامج دعم تحسين:</b> مراجعة المفاهيم الأساسية، تدريبات قصيرة، تغذية راجعة مباشرة، وتقويم قصير بعد المعالجة.</p><p><b>مهارات مستهدفة:</b> التحليل، الاستنتاج، تفسير النتائج، وربط المفاهيم العلمية بالحياة اليومية.</p>`;}
+function generateReport(){const s=summarize();if(!s.n){$('smartAnalysis').textContent='سيظهر التحليل تلقائيًا بعد رفع ملف النتائج.';return;}let strength=s.achievement>=90?'ارتفاع مستوى التحصيل العام ووضوح التقديرات العليا':'وجود مستوى جيد في التحصيل مع فرصة لتحسين بعض المؤشرات';let stability=s.gap<=3?'تقارب واضح بين الفصول واستقرار في الأداء':'وجود تفاوت نسبي بين الفصول يستدعي متابعة تطويرية';$('smartAnalysis').innerHTML=`<p>أظهرت نتائج التحليل الفني الذكي ${strength}، مع ${stability}. بلغت نسبة التحصيل العامة <b>${toArabicDigits(s.achievement.toFixed(1))}%</b>، وبلغ متوسط الدرجات <b>${toArabicDigits(s.avg.toFixed(1))}</b> من ${toArabicDigits(s.max)}.</p><p>يُوصى بالاستمرار في تعزيز الممارسات التعليمية الفاعلة، وتفعيل أنشطة إثرائية للطالبات مرتفعات الأداء، مع تنفيذ دعم تحسين مركز للمهارات التي تحتاج إلى تعزيز مثل التحليل والاستنتاج وتفسير النتائج العلمية.</p>`;buildPrintReport();}
+function buildPrintReport(){const s=summarize();if(!s.n)return;const meta={school:$('schoolName').value,subject:$('subjectName').value,teacher:$('teacherName').value,stage:$('stageName').value,grade:$('gradeName').value,term:$('termName').value,date:$('reportDate').value,principal:$('principalName').value,vice:$('viceName').value,measure:$('measureType').value,year:$('yearName').value};const levelRows=s.levels.map(x=>`<tr><td>${x.level}</td><td>${toArabicDigits(x.count)}</td><td>${toArabicDigits((x.count/s.n*100).toFixed(1))}%</td></tr>`).join('');const classRows=s.classStats.map(x=>`<tr><td>الفصل ${toArabicDigits(x.className)}</td><td>${toArabicDigits(x.count)}</td><td>${toArabicDigits(x.avg.toFixed(1))}</td><td>${toArabicDigits(x.percent.toFixed(1))}%</td></tr>`).join('');$('printReport').classList.add('show');$('printReport').innerHTML=`
+<div class="paperCover"><div class="paperTitle">تقرير التحليل الفني الذكي لنتائج الطالبات</div><div class="paperSub">${meta.school} • ${meta.subject}</div><div class="paperMeta"><div><b>المعلمة:</b> ${meta.teacher}</div><div><b>المرحلة:</b> ${meta.stage}</div><div><b>الصف:</b> ${meta.grade}</div><div><b>الفصل الدراسي:</b> ${meta.term}</div><div><b>نوع القياس:</b> ${meta.measure}</div><div><b>العام الدراسي:</b> ${meta.year}</div><div><b>التاريخ:</b> ${meta.date}</div><div><b>درجة التصحيح:</b> ${toArabicDigits(s.max)}</div></div></div>
+<div class="paperSection"><h3>أولًا: الملخص التنفيذي</h3><div class="paperGrid"><div class="paperMetric"><span>نسبة التحصيل</span><b>${toArabicDigits(s.achievement.toFixed(1))}%</b></div><div class="paperMetric"><span>متوسط الدرجات</span><b>${toArabicDigits(s.avg.toFixed(1))}</b></div><div class="paperMetric"><span>نسبة الممتازات</span><b>${toArabicDigits(s.percExcellent.toFixed(1))}%</b></div><div class="paperMetric"><span>مؤشر الاستقرار</span><b>${s.stability}</b></div></div></div>
+<div class="paperSection"><h3>ثانيًا: نتيجة كل فصل</h3><table><thead><tr><th>الفصل</th><th>عدد الطالبات</th><th>متوسط الدرجات</th><th>نسبة التحصيل</th></tr></thead><tbody>${classRows}</tbody></table></div>
+<div class="paperSection"><h3>ثالثًا: مستويات الطالبات حسب التقديرات</h3><table><thead><tr><th>التقدير</th><th>العدد</th><th>النسبة</th></tr></thead><tbody>${levelRows}</tbody></table></div>
+<div class="paperSection"><h3>رابعًا: الرسوم والمؤشرات البيانية</h3><div class="paperGrid"><div class="paperChart"><canvas id="pClassChart"></canvas></div><div class="paperChart"><canvas id="pLevelChart"></canvas></div><div class="paperChart"><canvas id="pAchievementChart"></canvas></div><div class="paperChart"><canvas id="pSkillsChart"></canvas></div></div></div>
+<div class="paperSection"><h3>خامسًا: التحليل الفني الذكي</h3><div class="paperText">${$('smartAnalysis').innerHTML}</div></div>
+<div class="paperSection"><h3>سادسًا: البرامج العلاجية والإثرائية والمهارات المستهدفة</h3><div class="paperText">${$('programsList').innerHTML}</div></div>
+<div class="paperSection"><h3>سابعًا: التوصيات النهائية</h3><div class="paperText"><p>المحافظة على مستوى التحصيل المرتفع وتعزيز الاستقرار بين الفصول.</p><p>توظيف أنشطة إثرائية لرفع مهارات التفكير العليا.</p><p>تنفيذ دعم تحسين قصير للمهارات التي تحتاج إلى تعزيز وفق نتائج التقويم.</p></div><div class="signature"><div class="signBox">مديرة المدرسة<br>${meta.principal||'........................'}</div><div class="signBox">وكيلة شؤون المعلمات<br>${meta.vice||'........................'}</div></div><p style="text-align:center;margin-top:28px;color:#64748b">تم إنشاء هذا التقرير عبر منصة كريمة بنت همام للتحليل الفني الذكي</p></div>`;setTimeout(renderPrintCharts,80);}
+function renderPrintCharts(){const s=summarize();if(!s.n)return;['pClassChart','pLevelChart','pAchievementChart','pSkillsChart'].forEach(id=>{if(charts[id])charts[id].destroy();});charts.pClassChart=new Chart($('pClassChart'),{type:'bar',data:{labels:s.classStats.map(x=>'فصل '+x.className),datasets:[{data:s.classStats.map(x=>x.percent),backgroundColor:'#2563eb',borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:100}}}});charts.pLevelChart=new Chart($('pLevelChart'),{type:'doughnut',data:{labels:s.levels.map(x=>x.level),datasets:[{data:s.levels.map(x=>x.count),backgroundColor:['#22c55e','#38bdf8','#f7c948','#fb923c','#ef4444']}]},options:{responsive:true,maintainAspectRatio:false}});charts.pAchievementChart=new Chart($('pAchievementChart'),{type:'bar',data:{labels:['التحصيل','الممتازات','الاستقرار'],datasets:[{data:[s.achievement,s.percExcellent,Math.max(0,100-s.gap*5)],backgroundColor:['#2563eb','#22c55e','#f7c948'],borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:100}}}});charts.pSkillsChart=new Chart($('pSkillsChart'),{type:'radar',data:{labels:['الفهم','التطبيق','التحليل','الاستنتاج','التفسير','التفكير العلمي'],datasets:[{data:skillValues(s),backgroundColor:'rgba(124,58,237,.2)',borderColor:'#7c3aed'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{min:0,max:100}}}});}
+function togglePrivacy(){privacy=!privacy;document.body.classList.toggle('privacy',privacy);}
+function printReport(){buildPrintReport();setTimeout(()=>window.print(),250)}
+async function downloadPDF(){buildPrintReport();await new Promise(r=>setTimeout(r,400));const el=$('printReport');const canvas=await html2canvas(el,{scale:2,useCORS:true,backgroundColor:'#ffffff'});const img=canvas.toDataURL('image/jpeg',0.95);const {jsPDF}=window.jspdf;const pdf=new jsPDF('p','mm','a4');const w=210;const h=canvas.height*w/canvas.width;let y=0;pdf.addImage(img,'JPEG',0,y,w,h);let remaining=h-297;while(remaining>0){y-=297;pdf.addPage();pdf.addImage(img,'JPEG',0,y,w,h);remaining-=297;}pdf.save('تقرير-التحليل-الفني-الذكي.pdf');}
+async function downloadImage(){buildPrintReport();await new Promise(r=>setTimeout(r,400));const canvas=await html2canvas($('printReport'),{scale:2,useCORS:true,backgroundColor:'#ffffff'});const a=document.createElement('a');a.download='تقرير-التحليل-الفني-الذكي.png';a.href=canvas.toDataURL('image/png');a.click();}
+function makeQR(){const link=$('driveLink').value.trim();$('qrcode').innerHTML='';if(!link){$('qrcode').textContent='أدخلي الرابط أولًا';return;}new QRCode($('qrcode'),{text:link,width:130,height:130,correctLevel:QRCode.CorrectLevel.H});}
+function openChatGPT(){window.open('https://chatgpt.com/','_blank')}
+</script>
+</body>
+</html>
