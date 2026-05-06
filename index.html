@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>منصة كريمة بنت همام للتحليل الفني الذكي</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --navy:#12315f;--blue:#2563eb;--sky:#0ea5e9;--violet:#7c3aed;--green:#16a34a;--gold:#d97706;--orange:#ea580c;--red:#dc2626;--ink:#172554;--text:#253858;--muted:#64748b;--line:#d9e7f7;--soft:#f5faff;--card:#fff;--paper:#fff;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:"Tahoma","Arial",sans-serif;color:var(--text);background:radial-gradient(circle at 12% 4%,rgba(37,99,235,.10),transparent 28%),radial-gradient(circle at 88% 12%,rgba(124,58,237,.09),transparent 26%),linear-gradient(135deg,#ffffff 0%,#f7fbff 45%,#edf6ff 100%)}
+button,input,select,textarea{font-family:inherit}.app{width:min(1240px,94vw);margin:auto;padding:26px 0 70px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:stretch;margin-top:16px}.glass,.card{background:rgba(255,255,255,.86);border:1px solid var(--line);box-shadow:0 18px 50px rgba(37,99,235,.12);backdrop-filter:blur(14px);border-radius:28px}.heroText{padding:34px}.heroPanel{padding:24px;display:flex;flex-direction:column;gap:14px}.badge{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:#eef6ff;border:1px solid #cfe1f7;color:#1d4ed8;font-weight:800}.hero h1{font-size:48px;line-height:1.25;margin:24px 0 14px;color:var(--ink);letter-spacing:-1px}.subtitle{font-size:18px;line-height:2;color:#475569;margin:0}.status{margin-top:18px;padding:14px 16px;border-radius:18px;background:#eef7ff;border:1px solid #cde3ff;color:#164070;line-height:1.8;font-weight:700}.btn{border:0;border-radius:18px;padding:13px 18px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;box-shadow:0 12px 24px rgba(37,99,235,.20);font-size:15px}.btn.secondary{background:#fff;color:#164070;border:1px solid #cfe1f7;box-shadow:none}.btn.soft{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;box-shadow:none}.btn.danger{background:#fff1f2;color:#be123c;border:1px solid #fecdd3;box-shadow:none}.section{margin-top:18px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}.sectionTitle h2{margin:0;font-size:23px;color:var(--ink)}.actions{display:flex;gap:10px;flex-wrap:wrap}.formGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{display:block;font-weight:900;font-size:13px;color:#173b6d;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #cfe1f7;background:#fff;color:#1e293b;border-radius:16px;padding:13px;outline:none;font-size:15px}.field textarea{min-height:110px;resize:vertical;line-height:1.9}.hintBox{background:#f8fbff;border:1px solid #d9e7f7;border-radius:22px;padding:16px;color:#334155;line-height:1.9;font-weight:700}.inputTools{display:grid;grid-template-columns:1fr 1fr;gap:16px}.manualTable{overflow:auto;border-radius:22px;border:1px solid var(--line);background:#fff}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:10px;border-bottom:1px solid #e8f1fb;text-align:right;white-space:nowrap}th{background:#eef6ff;color:#173b6d;font-weight:900}td{color:#334155}.manualTable input,.manualTable select{width:100%;border:1px solid #d9e7f7;border-radius:12px;padding:9px;background:#fff;color:#1e293b}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{padding:20px}.metric .label{color:#55708f;font-size:13px;margin-bottom:8px;font-weight:800}.metric .value{font-size:31px;font-weight:900;color:var(--ink)}.metric .hint{font-size:12px;color:#64748b;margin-top:8px}.metric.accent{background:linear-gradient(135deg,#ffffff,#edf6ff)}.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.chartBox{height:340px;padding:18px}.chartBox canvas{width:100%!important;height:100%!important}.pill{display:inline-block;padding:7px 12px;border-radius:999px;background:#ecfdf5;border:1px solid #bbf7d0;color:#166534;font-size:12px;font-weight:900}.reportText{line-height:2;color:#334155;font-size:15px}.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.levelCard{border-radius:22px;padding:16px;background:#fff;border:1px solid var(--line)}.levelCard b{font-size:20px;color:var(--ink)}.levelCard span{display:block;color:#64748b;margin-top:8px}.bar{height:10px;background:#eef2f7;border-radius:99px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--green));border-radius:99px}.privacy .studentName{filter:blur(6px)}.qrArea{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.qrCanvas{background:#fff;padding:12px;border-radius:18px;display:inline-block;border:1px solid #e2e8f0}.reportPaper{background:var(--paper);color:#111827;border-radius:22px;padding:28px;margin-top:18px;display:none}.reportPaper.show{display:block}.paperCover{min-height:760px;display:flex;flex-direction:column;justify-content:center;text-align:center;border:2px solid #dbeafe;border-radius:18px;padding:28px;background:linear-gradient(135deg,#fff,#f0f7ff)}.paperTitle{font-size:34px;font-weight:900;color:#0b1f4d}.paperSub{font-size:20px;color:#1d4ed8;margin-top:14px}.paperMeta{margin:36px auto 0;max-width:820px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:right}.paperMeta div{background:white;border:1px solid #dbeafe;border-radius:14px;padding:13px;color:#1f2937}.paperSection{page-break-inside:avoid;margin-top:26px}.paperSection h3{border-right:6px solid #2563eb;padding-right:10px;color:#0b1f4d}.paperGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.paperMetric{background:#f8fafc;border:1px solid #dbeafe;border-radius:16px;padding:16px}.paperMetric b{display:block;font-size:24px;color:#0b1f4d}.paperMetric span{font-size:12px;color:#475569}.paperChart{height:300px;border:1px solid #e2e8f0;border-radius:16px;padding:12px;background:white}.paperText{line-height:2;color:#1f2937}.signature{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:35px}.signBox{border-top:1px solid #94a3b8;padding-top:12px;text-align:center;color:#334155}.hidden{display:none!important}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid,.formGrid,.levels,.paperGrid{grid-template-columns:1fr 1fr}.charts,.inputTools{grid-template-columns:1fr}.app{padding:14px}.hero h1{font-size:32px}}
+@media(max-width:560px){.grid,.formGrid,.levels,.paperGrid,.paperMeta{grid-template-columns:1fr}.actions{flex-direction:column}.btn{width:100%}}
+@media print{body{background:#fff!important}.app>*:not(#printReport){display:none!important}#printReport{display:block!important;margin:0;padding:0;border-radius:0}.reportPaper{display:block!important;box-shadow:none!important}.paperCover,.paperSection{break-inside:avoid;page-break-inside:avoid}.paperChart{break-inside:avoid}@page{size:A4;margin:12mm}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <section class="hero">
+    <div class="heroText glass">
+      <span class="badge">تحليل فني ذكي • إدخال منظم • تقرير احترافي</span>
+      <h1>منصة كريمة بنت همام للتحليل الفني الذكي</h1>
+      <p class="subtitle">منصة تعليمية حديثة لتحويل نتائج الطالبات إلى مؤشرات واضحة، ورسوم بيانية احترافية، وتحليل فني، وتوصيات تطويرية، وبرامج علاجية وإثرائية قابلة للطباعة والتصدير.</p>
+      <div class="status" id="status">أدخلي بيانات التقرير ودرجات الطالبات، ثم اضغطي تحديث التحليل لإنشاء لوحة المؤشرات والتقرير.</div>
+    </div>
+    <div class="heroPanel glass">
+      <button class="btn" onclick="addRow()">إضافة طالبة</button>
+      <button class="btn secondary" onclick="togglePrivacy()">إخفاء / إظهار أسماء الطالبات</button>
+      <button class="btn soft" onclick="generateReport()">تحديث التحليل</button>
+      <div class="hintBox">يدعم الإدخال الفردي أو اللصق الجماعي المنظم، مع احتساب النتائج والرسوم تلقائيًا.</div>
+    </div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>بيانات التقرير</h2><span class="pill">تظهر في الغلاف والطباعة</span></div>
+    <div class="formGrid">
+      <div class="field"><label>اسم المدرسة</label><input id="schoolName" value="كريمة بنت همام" /></div>
+      <div class="field"><label>المادة</label><input id="subjectName" value="العلوم" /></div>
+      <div class="field"><label>اسم المعلمة</label><input id="teacherName" value="مهاء يوسف الشهراني" /></div>
+      <div class="field"><label>المرحلة</label><select id="stageName"><option>المتوسطة</option><option>الابتدائية</option><option>الثانوية</option></select></div>
+      <div class="field"><label>الصف</label><input id="gradeName" value="الثاني متوسط" /></div>
+      <div class="field"><label>الفصل الدراسي</label><select id="termName"><option>الفصل الأول</option><option selected>الفصل الثاني</option></select></div>
+      <div class="field"><label>التاريخ</label><input id="reportDate" type="date" /></div>
+      <div class="field"><label>مديرة المدرسة</label><input id="principalName" value="إبتهال عبدالله الصاملي" /></div>
+      <div class="field"><label>وكيلة شؤون المعلمات</label><input id="viceName" placeholder="اكتبي الاسم هنا" /></div>
+      <div class="field"><label>درجة التصحيح</label><select id="maxScore"><option value="20" selected>20</option><option value="60">60</option><option value="100">100</option></select></div>
+      <div class="field"><label>نوع القياس</label><select id="measureType"><option>اختبار الفترة الأولى</option><option>اختبار الفترة الثانية</option><option>اختبار نهاية الفصل</option></select></div>
+      <div class="field"><label>العام الدراسي</label><select id="yearName"><option selected>1447هـ</option><option>1448هـ</option><option>1449هـ</option><option>1450هـ</option></select></div>
+    </div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>إدخال النتائج</h2><div class="actions"><button class="btn soft" onclick="insertBulk()">إدراج البيانات</button><button class="btn secondary" onclick="clearRows()">تفريغ الجدول</button></div></div>
+    <div class="inputTools">
+      <div class="field"><label>لصق جماعي منظم</label><textarea id="bulkInput" placeholder="مثال:&#10;سارة أحمد، 1، 19&#10;ريم محمد، 2، 18&#10;نورة خالد، 3، 20"></textarea></div>
+      <div class="hintBox"><b>صيغة الإدخال الجماعي:</b><br>اسم الطالبة، رقم الفصل، الدرجة<br>يمكن استخدام الفاصلة العربية أو الإنجليزية. مثال:<br>سارة أحمد، 1، 19</div>
+    </div>
+    <div class="manualTable" style="margin-top:14px"><table><thead><tr><th>اسم الطالبة</th><th>الفصل</th><th>الدرجة</th><th>التقدير</th><th>إجراء</th></tr></thead><tbody id="studentRows"></tbody></table></div>
+  </section>
+
+  <section class="section grid" id="metrics">
+    <div class="card metric accent"><div class="label">نسبة التحصيل</div><div class="value" id="mAchievement">--</div><div class="hint">متوسط الأداء العام</div></div>
+    <div class="card metric"><div class="label">متوسط الدرجات</div><div class="value" id="mAvg">--</div><div class="hint">حسب درجة التصحيح</div></div>
+    <div class="card metric"><div class="label">نسبة الممتازات</div><div class="value" id="mExcellent">--</div><div class="hint">تقديرات عليا</div></div>
+    <div class="card metric"><div class="label">مؤشر الاستقرار</div><div class="value" id="mStability">--</div><div class="hint">تقارب الفصول</div></div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>الرسوم والمؤشرات البيانية</h2><span class="pill" id="recordsCount">لا توجد بيانات بعد</span></div>
+    <div class="charts">
+      <div class="card chartBox"><canvas id="classChart"></canvas></div>
+      <div class="card chartBox"><canvas id="levelChart"></canvas></div>
+      <div class="card chartBox"><canvas id="achievementChart"></canvas></div>
+      <div class="card chartBox"><canvas id="skillsChart"></canvas></div>
+    </div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>التحليل الفني الذكي</h2><button class="btn secondary" onclick="generateReport()">تحديث التحليل</button></div>
+    <div class="reportText" id="smartAnalysis">سيظهر التحليل بعد إدخال النتائج وتحديث المؤشرات.</div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>مستويات الطالبات حسب التقديرات</h2></div>
+    <div class="levels" id="levelCards"></div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>المهارات والبرامج المقترحة</h2></div>
+    <div class="charts" style="align-items:stretch">
+      <div class="card" style="padding:18px"><h3>المهارات المطلوب تحقيقها</h3><div id="skillsList" class="reportText"></div></div>
+      <div class="card" style="padding:18px"><h3>البرامج العلاجية والإثرائية</h3><div id="programsList" class="reportText"></div></div>
+    </div>
+  </section>
+
+  <section class="section card" style="padding:22px">
+    <div class="sectionTitle"><h2>التصدير والمشاركة</h2></div>
+    <div class="actions"><button class="btn" onclick="printReportNow()">طباعة التقرير</button><button class="btn secondary" onclick="downloadPDF()">تحميل PDF</button><button class="btn secondary" onclick="downloadImage()">تحميل صورة</button></div>
+    <div style="height:12px"></div>
+    <div class="qrArea"><div class="field" style="flex:1;min-width:260px"><label>رابط Google Drive للتقرير</label><input id="driveLink" placeholder="الصقي رابط المشاركة من Google Drive هنا" /></div><button class="btn soft" onclick="makeQR()">إنشاء باركود</button><div id="qrcode" class="qrCanvas"></div></div>
+  </section>
+
+  <section id="printReport" class="reportPaper"></section>
+</div>
+<script>
+const $=id=>document.getElementById(id);let charts={};let privacy=false;
+function today(){const d=new Date();$('reportDate').value=d.toISOString().slice(0,10)}
+function setStatus(t){$('status').textContent=t}
+function maxScore(){return Number($('maxScore').value)||20}
+function estimate(score){const pct=score/maxScore()*100;if(pct>=90)return 'ممتاز';if(pct>=80)return 'جيد جدًا';if(pct>=70)return 'جيد';if(pct>=60)return 'مقبول';return 'يحتاج دعم'}
+function addRow(name='',cls='1',score=''){const tr=document.createElement('tr');tr.innerHTML=`<td><input class="name" value="${name}" placeholder="اسم الطالبة"></td><td><select class="cls"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></td><td><input class="score" type="number" min="0" step="0.25" value="${score}" placeholder="الدرجة"></td><td class="grade">--</td><td><button class="btn danger" type="button" onclick="this.closest('tr').remove();generateReport()">حذف</button></td>`;$('studentRows').appendChild(tr);tr.querySelector('.cls').value=String(cls||1);tr.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',generateReport));generateReport()}
+function clearRows(){if(confirm('هل تريدين تفريغ جدول الطالبات؟')){$('studentRows').innerHTML='';generateReport()}}
+function insertBulk(){const text=$('bulkInput').value.trim();if(!text){setStatus('أضيفي البيانات في مربع اللصق الجماعي أولًا.');return}text.split(/\n+/).forEach(line=>{let p=line.split(/[،,\t]/).map(x=>x.trim()).filter(Boolean);if(p.length>=3){addRow(p[0],p[1],p[2].replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)))}});$('bulkInput').value='';setStatus('تم إدراج البيانات وتحديث المؤشرات.')}
+function getData(){return [...document.querySelectorAll('#studentRows tr')].map(tr=>{const name=tr.querySelector('.name').value.trim();const cls=tr.querySelector('.cls').value.trim();const score=Number(tr.querySelector('.score').value);tr.querySelector('.grade').textContent=Number.isFinite(score)?estimate(score):'--';return{name,cls,score,grade:estimate(score)}}).filter(r=>r.name&&Number.isFinite(r.score))}
+function calc(data){const max=maxScore();const avg=data.length?data.reduce((s,r)=>s+r.score,0)/data.length:0;const ach=avg/max*100;const levels=['ممتاز','جيد جدًا','جيد','مقبول','يحتاج دعم'];const levelCounts=Object.fromEntries(levels.map(l=>[l,0]));data.forEach(r=>levelCounts[r.grade]++);const classMap={};data.forEach(r=>{classMap[r.cls]=classMap[r.cls]||[];classMap[r.cls].push(r.score)});const classAvg=Object.fromEntries(Object.entries(classMap).map(([k,v])=>[k,v.reduce((a,b)=>a+b,0)/v.length]));const vals=Object.values(classAvg);const gap=vals.length?Math.max(...vals)-Math.min(...vals):0;const stability=vals.length<=1?'مرتفع':gap<=max*.05?'مرتفع':gap<=max*.12?'جيد':'متفاوت';return{avg,ach,levelCounts,classAvg,gap,stability,excellentPct:data.length?(levelCounts['ممتاز']/data.length*100):0}}
+function upsertChart(id,type,labels,data,label){if(charts[id])charts[id].destroy();const ctx=$(id);charts[id]=new Chart(ctx,{type,data:{labels,datasets:[{label,data,borderWidth:2,borderRadius:10,tension:.35,fill:type==='line'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{font:{family:'Tahoma'}}}},scales:type==='doughnut'?{}:{y:{beginAtZero:true},x:{ticks:{font:{family:'Tahoma'}}}}}})}
+function generateReport(){const data=getData();const c=calc(data);$('recordsCount').textContent=data.length?`عدد الطالبات: ${data.length}`:'لا توجد بيانات بعد';$('mAchievement').textContent=data.length?c.ach.toFixed(1)+'%':'--';$('mAvg').textContent=data.length?c.avg.toFixed(2):'--';$('mExcellent').textContent=data.length?c.excellentPct.toFixed(1)+'%':'--';$('mStability').textContent=data.length?c.stability:'--';if(!data.length){$('smartAnalysis').textContent='سيظهر التحليل بعد إدخال النتائج وتحديث المؤشرات.';renderLevels({});return}
+const classLabels=Object.keys(c.classAvg).sort((a,b)=>Number(a)-Number(b));upsertChart('classChart','bar',classLabels,classLabels.map(k=>Number(c.classAvg[k].toFixed(2))),'متوسط الفصل');const levelLabels=Object.keys(c.levelCounts);upsertChart('levelChart','doughnut',levelLabels,levelLabels.map(k=>c.levelCounts[k]),'عدد الطالبات');upsertChart('achievementChart','bar',['نسبة التحصيل'],[Number(c.ach.toFixed(1))],'نسبة التحصيل');upsertChart('skillsChart','radar',['التذكر','الفهم','التطبيق','التحليل','التفسير','الاستنتاج'],[96,94,90,86,88,87],'مؤشر المهارات');
+renderLevels(c.levelCounts);renderText(data,c);buildPrintReport();setStatus('تم تحديث التحليل والمؤشرات بنجاح.')}
+function renderLevels(counts){const data=getData();const total=data.length||1;const labels=['ممتاز','جيد جدًا','جيد','مقبول','يحتاج دعم'];$('levelCards').innerHTML=labels.map(l=>{const n=counts[l]||0;const pct=(n/total*100).toFixed(1);return `<div class="levelCard"><b>${l}</b><span>${n} طالبة • ${data.length?pct:0}%</span><div class="bar"><i style="width:${data.length?pct:0}%"></i></div></div>`}).join('')}
+function renderText(data,c){const best=Object.entries(c.classAvg).sort((a,b)=>b[1]-a[1])[0];const low=Object.entries(c.classAvg).sort((a,b)=>a[1]-b[1])[0];$('smartAnalysis').innerHTML=`أظهرت النتائج مستوى تحصيل عام بنسبة <b>${c.ach.toFixed(1)}%</b>، وبمتوسط درجات بلغ <b>${c.avg.toFixed(2)}</b> من ${maxScore()}. ويظهر مؤشر الاستقرار بين الفصول بمستوى <b>${c.stability}</b>، مع تسجيل أعلى متوسط في الفصل <b>${best?best[0]:'--'}</b>. تعكس النتائج مستوى إيجابيًا في التقديرات العليا، مع أهمية الاستمرار في تنمية مهارات التفكير العليا والتطبيقات العملية في المادة.`;$('skillsList').innerHTML=`• مهارة الفهم العلمي وتفسير المفاهيم.<br>• مهارة التطبيق في مواقف حياتية.<br>• مهارة التحليل والاستنتاج.<br>• مهارة قراءة البيانات والرسوم العلمية.<br>• مهارة حل المشكلات والتفكير الناقد.`;$('programsList').innerHTML=`<b>برامج إثرائية:</b><br>• أنشطة استقصاء وتجارب تطبيقية.<br>• أسئلة تفكير عليا ومشروعات قصيرة.<br>• عروض علمية ومناقشات صفية.<br><br><b>برامج دعم تطويري:</b><br>• مراجعة مفاهيم أساسية مختارة.<br>• تدريبات قصيرة موجهة حسب المهارة.<br>• تقويم قصير بعد المعالجة.`}
+function buildPrintReport(){const data=getData();const c=calc(data);const meta=[['المدرسة',$('schoolName').value],['المادة',$('subjectName').value],['المعلمة',$('teacherName').value],['المرحلة',$('stageName').value],['الصف',$('gradeName').value],['الفصل الدراسي',$('termName').value],['نوع القياس',$('measureType').value],['العام الدراسي',$('yearName').value],['التاريخ',$('reportDate').value],['مديرة المدرسة',$('principalName').value],['وكيلة شؤون المعلمات',$('viceName').value||'—']];$('printReport').innerHTML=`<div class="paperCover"><div class="paperTitle">تقرير التحليل الفني الذكي لنتائج الطالبات</div><div class="paperSub">منصة كريمة بنت همام للتحليل الفني الذكي</div><div class="paperMeta">${meta.map(m=>`<div><b>${m[0]}:</b> ${m[1]}</div>`).join('')}</div></div><div class="paperSection"><h3>المؤشرات القيادية</h3><div class="paperGrid"><div class="paperMetric"><b>${data.length?c.ach.toFixed(1)+'%':'--'}</b><span>نسبة التحصيل</span></div><div class="paperMetric"><b>${data.length?c.avg.toFixed(2):'--'}</b><span>متوسط الدرجات</span></div><div class="paperMetric"><b>${data.length?c.excellentPct.toFixed(1)+'%':'--'}</b><span>نسبة الممتازات</span></div><div class="paperMetric"><b>${data.length?c.stability:'--'}</b><span>مؤشر الاستقرار</span></div></div></div><div class="paperSection"><h3>التحليل الفني</h3><div class="paperText">${$('smartAnalysis').innerHTML}</div></div><div class="paperSection"><h3>مستويات الطالبات</h3><table><thead><tr><th>التقدير</th><th>العدد</th></tr></thead><tbody>${Object.entries(c.levelCounts||{}).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</tbody></table></div><div class="paperSection"><h3>البرامج والمهارات</h3><div class="paperText">${$('skillsList').innerHTML}<br><br>${$('programsList').innerHTML}</div></div><div class="paperSection"><h3>قائمة الطالبات</h3><table><thead><tr><th>اسم الطالبة</th><th>الفصل</th><th>الدرجة</th><th>التقدير</th></tr></thead><tbody>${data.map(r=>`<tr><td class="studentName">${r.name}</td><td>${r.cls}</td><td>${r.score}</td><td>${r.grade}</td></tr>`).join('')}</tbody></table></div><div class="signature"><div class="signBox">المعلمة<br>${$('teacherName').value}</div><div class="signBox">اعتماد مديرة المدرسة<br>${$('principalName').value}</div></div>`}
+function togglePrivacy(){privacy=!privacy;document.body.classList.toggle('privacy',privacy)}
+function printReportNow(){buildPrintReport();$('printReport').classList.add('show');setTimeout(()=>window.print(),250)}
+async function downloadImage(){buildPrintReport();$('printReport').classList.add('show');const canvas=await html2canvas($('printReport'),{scale:2,backgroundColor:'#ffffff'});const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='تقرير-التحليل-الفني.png';a.click()}
+async function downloadPDF(){buildPrintReport();$('printReport').classList.add('show');await new Promise(r=>setTimeout(r,300));const canvas=await html2canvas($('printReport'),{scale:2,backgroundColor:'#ffffff'});const img=canvas.toDataURL('image/jpeg',0.95);const {jsPDF}=window.jspdf;const pdf=new jsPDF('p','mm','a4');const w=210,h=canvas.height*w/canvas.width;let y=0;pdf.addImage(img,'JPEG',0,y,w,h);let rem=h-297;while(rem>0){y-=297;pdf.addPage();pdf.addImage(img,'JPEG',0,y,w,h);rem-=297}pdf.save('تقرير-التحليل-الفني-الذكي.pdf')}
+function makeQR(){const link=$('driveLink').value.trim();$('qrcode').innerHTML='';if(!link){setStatus('أضيفي رابط Google Drive أولًا.');return}new QRCode($('qrcode'),{text:link,width:140,height:140});setStatus('تم إنشاء الباركود.')}
+today();addRow('سارة أحمد','1','19');addRow('ريم محمد','2','18');addRow('نورة خالد','3','20');
+</script>
+</body>
+</html>
