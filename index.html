@@ -245,11 +245,132 @@ td input,td select{padding:10px;border-radius:12px;background:#fff;text-align:ce
 @media(max-width:980px){.hero{grid-template-columns:1fr}.grid.meta{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}.charts{grid-template-columns:1fr}.analysis-box{grid-template-columns:1fr}.levels{grid-template-columns:1fr 1fr}.meta-strip{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.app{width:96vw;padding-top:14px}.hero,.report{padding:16px;border-radius:22px}h1{font-size:31px}.lead{font-size:16px}.grid.meta,.kpis,.levels,.meta-strip{grid-template-columns:1fr}.btn{width:100%}.section-title{flex-direction:column;align-items:stretch}.footer-sign{flex-direction:column}}
 @media print{
-  .school-identity{display:none!important}
-  .report-cover:before{height:115px!important}
-  .report-cover .cover-official{margin-bottom:38px!important}
 
-  body{background:#fff!important}.app{width:100%;padding:0}.no-print,.hero,.section.input-section{display:none!important}.report{box-shadow:none;border:0;border-radius:0;padding:0}.report-cover,.chart-card,.smart-card,.kpi,.level,.meta-item{break-inside:avoid;page-break-inside:avoid}.section{break-inside:avoid;page-break-inside:avoid}.charts{grid-template-columns:1fr 1fr}.chart-card{min-height:310px}.chart-box{height:230px}.btn{display:none!important} @page{size:A4;margin:12mm}
+  body{
+
+    background:#fff !important;
+
+  }
+
+  .app{
+
+    width:100% !important;
+
+    padding:0 !important;
+
+  }
+
+  .no-print,
+
+  .hero,
+
+  .section.input-section,
+
+  .school-identity{
+
+    display:none !important;
+
+  }
+
+  .report{
+
+    display:block !important;
+
+    width:100% !important;
+
+    box-shadow:none !important;
+
+    border:0 !important;
+
+    border-radius:0 !important;
+
+    padding:0 !important;
+
+  }
+
+  .kpis{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(5,1fr) !important;
+
+    gap:14px !important;
+
+  }
+
+  .charts{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(2,1fr) !important;
+
+    gap:16px !important;
+
+  }
+
+  .analysis-box{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(2,1fr) !important;
+
+    gap:16px !important;
+
+  }
+
+  .levels{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(4,1fr) !important;
+
+    gap:12px !important;
+
+  }
+
+  .chart-card,
+
+  .kpi,
+
+  .level,
+
+  .smart-card,
+
+  .meta-item,
+
+  .report-cover{
+
+    break-inside:avoid !important;
+
+    page-break-inside:avoid !important;
+
+  }
+
+  .chart-card{
+
+    min-height:330px !important;
+
+  }
+
+  .chart-box{
+
+    height:250px !important;
+
+  }
+
+  canvas{
+
+    max-width:100% !important;
+
+  }
+
+  @page{
+
+    size:A4;
+
+    margin:12mm;
+
+
 }
 </style>
 </head>
